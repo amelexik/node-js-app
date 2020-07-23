@@ -12,7 +12,8 @@ const documentModelSchema = mongoose.Schema({
         minLength: 7
     }
 })
+documentModelSchema.index({filename: 'text', content: 'text'});
 
-const DocumentModel = mongoose.model('Document', documentModelSchema)
+const DocumentModel = mongoose.model('DocumentModel', documentModelSchema)
 
 module.exports = DocumentModel

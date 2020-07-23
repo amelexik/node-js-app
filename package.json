@@ -16,6 +16,7 @@
     "md5": "^2.2.1",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.25",
+    "readdir-enhanced": "^6.0.4",
     "search-in-file": "^1.2.2",
     "sequelize": "^6.3.3",
     "validator": "^13.1.1"

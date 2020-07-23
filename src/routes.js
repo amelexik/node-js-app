@@ -2,7 +2,7 @@ const express = require('express')
 const User = require('./models/User')
 const router = express.Router()
 const path = require('path')
-const directoryPath = path.join(__dirname, '..', process.env.SEARCH_DIR);
+const DocumentModel = require('./models/DocumentModel')
 
 router.post('/users', async (req, res) => {
     // Create a new user
@@ -42,12 +42,28 @@ router.get("/search/:term", (req, res, next) => {
      */
 
     let term = req.params.term;
+
+    /**
+     * search in filesystem
+     */
+    /*
+    const directoryPath = path.join(__dirname, '..', process.env.SEARCH_DIR);
     let searchInFile = require("search-in-file");
     let responseObject = {'term':term,'result':null};
     searchInFile.fileSearch([directoryPath], term, {recursive: true, searchResults: 'lineNo'})
         .then(function (results) {
             responseObject.result = results;
             res.json(responseObject);
+        });
+     */
+
+
+    DocumentModel.find({$text: {$search: term}})
+        .limit(10)
+        .exec(function (err, docs) {
+            if (err)
+                return res.json(err)
+            return res.json(docs);
         });
 })
 
