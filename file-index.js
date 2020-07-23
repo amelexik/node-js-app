@@ -94,13 +94,16 @@ const SearchIndex = {
 
             // Async Iterator API
             let data = [];
-            for await (let item of readdir.iterator(dd, {filter: "*.txt",basePath: dd})) {
+            for await (let item of readdir.iterator(dd, {deep: true, basePath: dd})) {
                 let obj = {}
-                obj.filename = await pushObject(item);
-                console.log(obj);
+                fs.readSync(item, 'utf8', async function (err, content) {
+                    obj.filename = content
+                })
+                data.push(obj)
             }
 
 
+            console.log(data)
             console.log('finish')
         }
     }
