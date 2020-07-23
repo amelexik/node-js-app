@@ -56,6 +56,14 @@ var walk = function (dir, done) {
 
 
 let dd = path.join(__dirname, process.env.SEARCH_DIR);
+require('log-timestamp')
+// fs.watch(dd, { encoding: 'utf8' }, (eventType, filename) => {
+//     console.log(eventType);
+//     if (filename) {
+//         console.log(filename);
+//     }
+// });
+
 
 walk(dd, function (err, results) {
     if (err) throw err;
