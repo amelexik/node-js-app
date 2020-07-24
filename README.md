@@ -20,6 +20,7 @@ $ npm install
 # Run
 
 ```sh
+$ node file-index.js
 $ node index.js
 ```
 
